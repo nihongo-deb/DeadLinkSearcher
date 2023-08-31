@@ -9,7 +9,7 @@ import java.net.URLConnection;
 
 @Component
 public class IsAvailableConnection {
-    private static boolean isAvailableURL(String urlStr) {
+    public boolean isAvailableURL(String urlStr) {
         try {
             URL url = new URL(urlStr);
             URLConnection conn = url.openConnection();
