@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-link
+      author: Lyubanko Daniil
+      changes:
+        - createTable:
+            tableName: link
+            columns:
+              - column:
+                  name: link_id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: link_url
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: link_last_check
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: link_status
+                  type: link_status
+                  constraints:
+                    nullable: false
