@@ -32,7 +32,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: user_telegram_id
-                  type: bigserial
+                  type: bigint
                   constraints:
                     unique: true
                     nullable: false
@@ -44,6 +44,11 @@ databaseChangeLog:
               - column:
                   name: user_updated_at
                   type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_role
+                  type: role
                   constraints:
                     nullable: false
 
