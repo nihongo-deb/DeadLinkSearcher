@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user
+      author: Lyubanko Daniil
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_name
+                  type: varchar(128)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_email
+                  type: varchar(256)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_password
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_telegram_id
+                  type: bigserial
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
