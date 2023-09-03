@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-link-status
+      author: Lyubanko Daniil
+      changes:
+        - sql:
+            sql: create type Link_Status as enum ('OK', 'BAD');

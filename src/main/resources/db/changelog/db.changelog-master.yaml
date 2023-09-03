@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changeset/create-role-enum.yaml
+  - include:
+      file: db/changelog/changeset/create-link-status-enum.yaml
