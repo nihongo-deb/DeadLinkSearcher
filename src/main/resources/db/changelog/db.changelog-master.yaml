@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-user-table.yaml
   - include:
       file: db/changelog/changeset/create-link-table.yaml
+  - include:
+      file: db/changelog/changeset/alter-user-add-role.yaml
