@@ -1,6 +1,5 @@
 package org.nihongo_deb.DeadLinkSearcher.Services;
 
-import jakarta.validation.Valid;
 import org.nihongo_deb.DeadLinkSearcher.DTO.InputArrayURLsDTO;
 import org.nihongo_deb.DeadLinkSearcher.DTO.InvalidArrayURLsDTO;
 import org.nihongo_deb.DeadLinkSearcher.DTO.OutputArrayURLsDTO;
