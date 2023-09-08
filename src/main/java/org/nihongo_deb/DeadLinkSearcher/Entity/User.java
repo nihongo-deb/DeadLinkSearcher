@@ -34,7 +34,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Column(name = "user_role")
-    protected Role role;
+    private Role role;
 
     public UUID getId() {
         return id;
