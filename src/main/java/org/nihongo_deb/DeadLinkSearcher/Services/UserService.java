@@ -2,6 +2,7 @@ package org.nihongo_deb.DeadLinkSearcher.Services;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.nihongo_deb.DeadLinkSearcher.Entity.Role;
 import org.nihongo_deb.DeadLinkSearcher.Entity.User;
 import org.nihongo_deb.DeadLinkSearcher.Repositories.UserRepository;
@@ -16,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 

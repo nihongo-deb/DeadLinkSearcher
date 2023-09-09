@@ -1,21 +1,18 @@
 package org.nihongo_deb.DeadLinkSearcher.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "User")
+@Table(name = "\"user\"")
 public class User {
     @Id
     @Column(name = "user_id")
     private UUID id;
 
-    @Column(name = "username")
+    @Column(name = "user_name")
     private String username;
 
     @Column(name = "user_email")
@@ -34,6 +31,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public UUID getId() {
