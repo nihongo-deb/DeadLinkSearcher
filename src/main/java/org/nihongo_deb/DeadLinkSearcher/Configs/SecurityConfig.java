@@ -3,6 +3,7 @@ package org.nihongo_deb.DeadLinkSearcher.Configs;
 import lombok.RequiredArgsConstructor;
 import org.nihongo_deb.DeadLinkSearcher.Services.UserService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,6 +19,7 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@Configuration
 public class SecurityConfig {
     private final UserService userService;
 
@@ -27,14 +29,13 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/**").authenticated()
-                .anyRequest().permitAll()
+                .requestMatchers("/api/v1/array").authenticated()
+                .requestMatchers("/api/v1/auth").permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-
         return http.build();
     }
 
