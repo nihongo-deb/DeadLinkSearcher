@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: create-role
-      author: Lyubanko Daniil
-      changes:
-        - sql:
-            sql: create type Role as enum ('ROLE_USER', 'ROLE_ADMIN')

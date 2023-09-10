@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-role
+      author: Lyubanko Daniil
+      changes:
+        - createTable:
+            tableName: user-role
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_user_role__user
+                    referencedTableName: "user"
+                    referencedColumnNames: user_id
+              - column:
+                  name: role_id
+                  type: bigserial
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_user_role__role
+                    referencedTableName: role
+                    referencedColumnNames: role_id

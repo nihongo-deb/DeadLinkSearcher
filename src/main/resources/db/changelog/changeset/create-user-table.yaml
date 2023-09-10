@@ -46,9 +46,3 @@ databaseChangeLog:
                   type: timestamp
                   constraints:
                     nullable: false
-              - column:
-                  name: user_role
-                  type: role
-                  constraints:
-                    nullable: false
-

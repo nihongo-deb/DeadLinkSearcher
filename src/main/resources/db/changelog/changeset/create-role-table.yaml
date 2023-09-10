@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-role
+      author: Lyubanko Daniil
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: role_id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_name
+                  type: varchar(32)
+                  constraints:
+                    unique: true
+                    nullable: false
