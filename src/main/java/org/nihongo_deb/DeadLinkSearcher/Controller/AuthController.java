@@ -13,10 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -33,7 +30,6 @@ public class AuthController {
         } catch (BadCredentialsException e){
             return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
         }
-        System.out.println("good 1");
 
         UserDetails userDetails;
         try {
@@ -41,10 +37,13 @@ public class AuthController {
         } catch (UsernameNotFoundException e){
             return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Пользоватеь не найден"), HttpStatus.UNAUTHORIZED);
         }
-        System.out.println("good 2");
 
         String token = jwtTokenUtils.generateToken(userDetails);
-        System.out.println("good 3");
         return ResponseEntity.ok(new JwtResponse(token));
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> testSecurity(){
+        return ResponseEntity.ok("here we go");
     }
 }

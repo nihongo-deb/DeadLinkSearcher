@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenUtils {
@@ -45,7 +46,9 @@ public class JwtTokenUtils {
     }
 
     public List<Role> getRoles(String token){
-        return getAllClaimsFromToken(token).get("roles", List.class);
+        return (List<Role>) getAllClaimsFromToken(token)
+                .get("roles", List.class)
+                .stream().map(role -> Role.stringToRole((String) role)).collect(Collectors.toList());
     }
 
     private Claims getAllClaimsFromToken(String token){
