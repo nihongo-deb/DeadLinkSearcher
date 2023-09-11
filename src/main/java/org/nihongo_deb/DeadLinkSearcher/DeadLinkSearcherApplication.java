@@ -7,6 +7,7 @@ import org.nihongo_deb.DeadLinkSearcher.Entity.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class DeadLinkSearcherApplication {
@@ -27,5 +28,10 @@ public class DeadLinkSearcherApplication {
 		});
 
 		return modelMapper;
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
 	}
 }

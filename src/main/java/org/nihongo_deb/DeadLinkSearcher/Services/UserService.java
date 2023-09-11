@@ -16,6 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public Optional<User> findByUsername(String username){
         return userRepository.findByUsername(username);
@@ -52,7 +54,8 @@ public class UserService implements UserDetailsService {
         user.setRoles(List.of(roleService.findRoleByName(Role.RoleType.ROLE_USER.name().toString()).get()));
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
-
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println(user);
         userRepository.save(user);
     }
 
