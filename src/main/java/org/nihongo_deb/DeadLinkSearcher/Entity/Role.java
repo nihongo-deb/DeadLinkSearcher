@@ -1,17 +1,21 @@
 package org.nihongo_deb.DeadLinkSearcher.Entity;
 
-public enum Role {
-    ROLE_USER, ROLE_ADMIN;
+import jakarta.persistence.*;
+import lombok.Data;
 
-    public static Role stringToRole(String strRole){
-        switch (strRole){
-            case "ROLE_USER" -> {
-                return ROLE_USER;
-            }
-            case "ROLE_ADMIN" -> {
-                return ROLE_ADMIN;
-            }
-        }
-        return null;
+@Entity
+@Table(name = "role")
+@Data
+public class Role {
+    @Id
+    @Column(name = "role_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "role_name")
+    private String name;
+
+    public enum RoleType {
+        ROLE_USER, ROLE_ADMIN;
     }
 }

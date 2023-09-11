@@ -2,9 +2,9 @@ package org.nihongo_deb.DeadLinkSearcher.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,7 +34,11 @@ public class User {
     @Column(name = "user_updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "user_role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany
+    @JoinTable(
+            name = "user-role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles;
 }
