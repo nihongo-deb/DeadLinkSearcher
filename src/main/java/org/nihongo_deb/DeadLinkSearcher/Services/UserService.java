@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final RoleService roleService;
     private final ModelMapper modelMapper;
 
     public Optional<User> findByUsername(String username){
@@ -43,12 +44,12 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                List.of(user.getRole()).stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList())
+                user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList())
         );
     }
 
     public void createNewUser(User user){
-        user.setRole(Role.ROLE_USER);
+        user.setRoles(List.of(roleService.findRoleByName(Role.RoleType.ROLE_USER.name().toString()).get()));
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
 
