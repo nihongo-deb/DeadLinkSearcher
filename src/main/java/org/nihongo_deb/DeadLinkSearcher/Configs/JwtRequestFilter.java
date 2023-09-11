@@ -52,7 +52,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     null,
                     roles
                             .stream()
-                            .map((Role role) -> new SimpleGrantedAuthority(role.toString()))
+                            .map((Role role) -> new SimpleGrantedAuthority(role.getName()))
                             .collect(Collectors.toList())
             );
             SecurityContextHolder.getContext().setAuthentication(springToken);

@@ -1,11 +1,11 @@
 package org.nihongo_deb.DeadLinkSearcher.Controller;
 
-import jakarta.validation.Valid;
 import org.nihongo_deb.DeadLinkSearcher.DTO.InputArrayURLsDTO;
 import org.nihongo_deb.DeadLinkSearcher.DTO.OutputArrayURLsDTO;
 import org.nihongo_deb.DeadLinkSearcher.Services.ArrayURLsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +20,7 @@ public class ArrayURLCheckerController {
     }
 
     @PostMapping
-    public OutputArrayURLsDTO checkURLs(InputArrayURLsDTO inputArrayURLsDTO){
+    public OutputArrayURLsDTO checkURLs(@RequestBody InputArrayURLsDTO inputArrayURLsDTO){
         return arrayURLsService.checkURLs(inputArrayURLsDTO);
     }
 }
