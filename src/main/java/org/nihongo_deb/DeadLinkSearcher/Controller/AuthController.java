@@ -3,6 +3,7 @@ package org.nihongo_deb.DeadLinkSearcher.Controller;
 import lombok.RequiredArgsConstructor;
 import org.nihongo_deb.DeadLinkSearcher.DTO.JwtRequest;
 import org.nihongo_deb.DeadLinkSearcher.DTO.JwtResponse;
+import org.nihongo_deb.DeadLinkSearcher.DTO.RegistrationUserDto;
 import org.nihongo_deb.DeadLinkSearcher.Exceptions.AppError;
 import org.nihongo_deb.DeadLinkSearcher.Services.UserService;
 import org.nihongo_deb.DeadLinkSearcher.Util.JwtTokenUtils;
@@ -23,7 +24,7 @@ public class AuthController {
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
@@ -41,6 +42,22 @@ public class AuthController {
         String token = jwtTokenUtils.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto userDto){
+        userService.createNewUser(userDto);
+
+        UserDetails userDetails;
+        try {
+            userDetails = userService.loadUserByUsername(userDto.getUsername());
+        } catch (UsernameNotFoundException e){
+            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Пользоватеь не найден"), HttpStatus.UNAUTHORIZED);
+        }
+
+        String token = jwtTokenUtils.generateToken(userDetails);
+        return ResponseEntity.ok(new JwtResponse(token));
+    }
+
 
     @GetMapping("/test")
     public ResponseEntity<?> testSecurity(){
